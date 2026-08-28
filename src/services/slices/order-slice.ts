@@ -6,12 +6,14 @@ import { TOrder } from '@utils-types';
 type TOrderState = {
   orderRequest: boolean;
   orderModalData: TOrder | null;
+  selectedOrder: TOrder | null;
   error: string | null;
 };
 
 const initialState: TOrderState = {
   orderRequest: false,
   orderModalData: null,
+  selectedOrder: null,
   error: null
 };
 
@@ -45,6 +47,7 @@ const orderSlice = createSlice({
   reducers: {
     clearOrder: (state) => {
       state.orderModalData = null;
+      state.selectedOrder = null;
       state.error = null;
     }
   },
@@ -68,7 +71,7 @@ const orderSlice = createSlice({
       })
       .addCase(getOrderByNumber.fulfilled, (state, action) => {
         state.orderRequest = false;
-        state.orderModalData = action.payload;
+        state.selectedOrder = action.payload;
       })
       .addCase(getOrderByNumber.rejected, (state, action) => {
         state.orderRequest = false;

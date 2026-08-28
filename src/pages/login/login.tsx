@@ -4,14 +4,15 @@ import { LoginUI } from '@ui-pages';
 
 import { login } from '../../services/slices';
 
-import { useDispatch } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
 
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const Login: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const location = useLocation();
+  const error = useSelector((state) => state.user.error);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -26,13 +27,15 @@ export const Login: FC = () => {
     )
       .unwrap()
       .then(() => {
-        navigate('/');
-      });
+        const from = location.state?.from || { pathname: '/' };
+        navigate(from);
+      })
+      .catch(() => {});
   };
 
   return (
     <LoginUI
-      errorText=''
+      errorText={error || ''}
       email={email}
       setEmail={setEmail}
       password={password}

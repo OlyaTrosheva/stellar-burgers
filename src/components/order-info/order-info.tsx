@@ -21,12 +21,10 @@ export const OrderInfo: FC = () => {
   }, [dispatch, number]);
 
   const orderData = useSelector((state) => {
-    const orders = state.order.orderModalData;
-
-    if (orders && String(orders.number) === number) {
-      return orders;
+    const order = state.order.selectedOrder;
+    if (order && String(order.number) === number) {
+      return order;
     }
-
     return null;
   });
 
