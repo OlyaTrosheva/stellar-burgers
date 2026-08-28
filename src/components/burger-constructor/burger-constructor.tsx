@@ -7,11 +7,14 @@ import {
   clearOrder,
   createOrder
 } from '../../services/slices';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor: FC = () => {
   /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
   const dispatch = useDispatch();
-
+  const location = useLocation();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.user.user);
   const bun = useSelector((state) => state.burgerConstructor.bun);
 
   const ingredients = useSelector(
@@ -28,6 +31,13 @@ export const BurgerConstructor: FC = () => {
 
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
+
+    if (!user) {
+      navigate('/login', {
+        state: { from: location }
+      });
+      return;
+    }
 
     const ingredients = [
       constructorItems.bun._id,
