@@ -23,7 +23,7 @@ import {
   IngredientDetails,
   ProtectedRoute
 } from '@components';
-import { Preloader } from '@ui';
+
 import { getIngredients, getUser } from '../../services/slices';
 import { useDispatch, useSelector } from '../../services/store';
 
@@ -36,14 +36,6 @@ const App: FC = () => {
   const background = location.state?.background;
 
   const isAuthChecked = useSelector((state) => state.user.isAuthChecked);
-
-  const ingredients = useSelector((state) => state.ingredients.ingredients);
-
-  const isIngredientsLoading = useSelector(
-    (state) => state.ingredients.isLoading
-  );
-
-  const error = useSelector((state) => state.ingredients.error);
 
   useEffect(() => {
     dispatch(getIngredients());
