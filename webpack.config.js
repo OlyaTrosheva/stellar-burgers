@@ -3,6 +3,8 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
+console.log('ENV FILE:', path.resolve(__dirname, '.env'));
+
 module.exports = {
   entry: path.resolve(__dirname, './src/index.tsx'),
   module: {
@@ -54,7 +56,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html'
     }),
-    new Dotenv()
+    new Dotenv({
+  path: path.resolve(__dirname, '.env')
+})
   ],
   resolve: {
     extensions: [
