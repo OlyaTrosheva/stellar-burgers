@@ -5,7 +5,8 @@ export default defineConfig({
   testMatch: '**/*.pl.tsx',
   use: {
     baseURL: 'http://localhost:4000',
-    trace: 'on-first-retry'
+    trace: 'on-first-retry',
+    serviceWorkers: 'block'
   },
   webServer: {
     command: 'npm start',
