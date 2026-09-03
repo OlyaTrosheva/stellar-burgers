@@ -95,7 +95,7 @@ test.describe('Конструктор бургера', () => {
 
     const orderModal = page.locator('[id="modals"]');
 
-    await expect(orderModal.getByText(/^\d+$/)).toBeVisible({ timeout: 30000 });
+    await expect(orderModal.getByText('109723')).toBeVisible({ timeout: 30000 });
 
     const constructorSection = page.getByTestId('burger-constructor');
 
@@ -109,6 +109,6 @@ test.describe('Конструктор бургера', () => {
 
     await orderModal.locator('button:has(svg)').click();
 
-    await expect(orderModal.getByText(/^\d+$/)).not.toBeVisible();
+    await expect(orderModal.getByText('109723')).not.toBeVisible();
   });
 });
